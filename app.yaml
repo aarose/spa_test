@@ -4,10 +4,6 @@ api_version: 1
 threadsafe: true
 
 handlers:
-- url: /css
-  static_dir: css
-  secure: always
-
 - url: /js
   static_dir: js
   secure: always
