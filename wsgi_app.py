@@ -9,31 +9,31 @@ config = {
 
 routes = [
     webapp2.Route(
-        r'/signup',
+        r'/api/v1/signup',
         handler=handlers.SignupHandler,
         name='signup',
         methods=['POST', 'OPTIONS'],
     ),
     webapp2.Route(
-        r'/login',
+        r'/api/v1/login',
         handler=handlers.LoginHandler,
         name='login',
         methods=['POST', 'OPTIONS'],
     ),
     webapp2.Route(
-        r'/logout',
+        r'/api/v1/logout',
         handler=handlers.LogoutHandler,
         name='logout',
         methods=['GET', 'OPTIONS'],
     ),
     webapp2.Route(
-        r'/users',
+        r'/api/v1/users',
         handler=handlers.UserListHandler,
         name='user-list',
         methods=['GET', 'OPTIONS'],
     ),
     webapp2.Route(
-        r'/users/<product_id:\d+>',
+        r'/api/v1/users/<user_id:\d+>',
         handler=handlers.UserHandler,
         name='user',
         methods=['GET', 'OPTIONS'],

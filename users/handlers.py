@@ -21,7 +21,11 @@ class UserListHandler(JsonHandler):
 
 
 class UserHandler(JsonHandler):
-    """ Deals with actions that target a specific user. """
+    """
+    Deals with actions that target a specific user.
+
+    TODO
+    """
     def _get_user(self, user_id):
         """ Return the user object. """
         pass
@@ -29,7 +33,7 @@ class UserHandler(JsonHandler):
     @token_required
     def get(self):
         """ Return detail view of user with matching ID. """
-        self.response.write('users go here')
+        pass
 
     @token_required
     def put(self):
