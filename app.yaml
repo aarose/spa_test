@@ -6,15 +6,15 @@ threadsafe: true
 handlers:
 - url: /css
   static_dir: css
+  secure: always
 
 - url: /js
   static_dir: js
-
-- url: /.*
-  script: wsgi_app.app
   secure: always
 
-# - url: /api/v1/auth ??
+- url: /api/v1/.*
+  script: wsgi_app.app
+  secure: always
 
 - url: /$
   static_files: index.html
