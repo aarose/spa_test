@@ -1,0 +1,36 @@
+<header ng-include="'templates/main_nav.html'"></header>
+
+<div class="container">
+
+  <div class="page-header">
+    <h1>{{ title }}</h1>
+  </div><!--/page-header -->
+
+  <div class="row">
+    <div class="col-sm-12">
+
+      <table ng-if="showMessages()" class="table table-hover">
+        <thead>
+          <tr>
+            <th class="col-sm-2">Date</th>
+            <th class="col-sm-2">From</th>
+            <th class="col-sm-8">Contents</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr ng-repeat="message in messages">
+            <td>{{ message.date }}</td>
+            <td>{{ message.from.first_name + ' ' + message.from.last_name }}</td>
+            <td>{{ message.contents }}</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div ng-if="!showMessages()">
+        <p class="lead">You have no messages.</p>
+      </div>
+
+    </div><!--/col -->
+  </div><!--/row -->
+
+</div><!--/container -->
