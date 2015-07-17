@@ -1,5 +1,5 @@
 angular
-  .module('messageApp', ['ui.router'])
+  .module('messageApp', ['ui.router', 'ngCookies'])
   .config(['$urlRouterProvider', '$stateProvider', function($urlRouterProvider, $stateProvider) {
     $urlRouterProvider.otherwise('/');
 
@@ -8,6 +8,11 @@ angular
         url: '/login',
         templateUrl: 'templates/login.html',
         controller: 'loginCtrl',
+        onEnter: ['$state', '$cookies', function($state, $cookies) {
+          if ($cookies.get('authToken')) {
+            $state.go('inbox');
+          }
+        }]
       })
       .state('inbox', {
         url: '/',
@@ -18,6 +23,11 @@ angular
             return Messages.get();
           }]
         },
+        onEnter: ['$state', '$cookies', function($state, $cookies) {
+          if (!($cookies.get('authToken'))) {
+            $state.go('login');
+          }
+        }]
       })
       .state('compose', {
         url: '/compose',
@@ -28,6 +38,11 @@ angular
           }]
         },
         controller: 'composeCtrl',
+        onEnter: ['$state', '$cookies', function($state, $cookies) {
+          if (!($cookies.get('authToken'))) {
+            $state.go('login');
+          }
+        }]
       })
       .state('directory', {
         url: '/directory',
@@ -38,13 +53,28 @@ angular
           }]
         },
         controller: 'directoryCtrl',
+        onEnter: ['$state', '$cookies', function($state, $cookies) {
+          if (!($cookies.get('authToken'))) {
+            $state.go('login');
+          }
+        }]
       })
       .state('logout', {
         url: '/logout',
+        onEnter: ['$state', '$cookies', function($state, $cookies) {
+          if (!($cookies.get('authToken'))) {
+            $state.go('login');
+          }
+        }]
       })
       .state('signup', {
         url: '/signup',
         templateUrl: 'templates/signup.html',
         controller: 'signupCtrl',
+        onEnter: ['$state', '$cookies', function($state, $cookies) {
+          if ($cookies.get('authToken')) {
+            $state.go('inbox');
+          }
+        }]
       })
   }])

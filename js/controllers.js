@@ -1,7 +1,27 @@
 angular
   .module('messageApp')
-  .controller('loginCtrl', ['$scope', function($scope) {
+  .controller('authCtrl', ['$cookies', function($cookies) {
+    // Retrieving a cookie
+    var authToken = $cookies.get('authToken');
+    // Setting a cookie
+    $cookies.put('authToken', 'oatmeal');
+    // Delete a cookie
+    $cookies.remove('authToken');
+  }])
+  .controller('loginCtrl', ['$scope', '$cookies', '$state', function($scope, $cookies, $state) {
     $scope.title = 'Login';
+    $scope.authenticate = function() {
+      var user_email = $scope.user.email;
+      var user_password = $scope.user.password;
+      // take the email and password info out of the form
+      // POST to the api to auth
+      // check response status for errors
+      // if incorrect, display error message and redisplay email but delete the password
+      // if correct, put the token in the cookie
+      $cookies.put('authToken', 'oatmeal');
+      // and redirect to the inbox
+      $state.go('inbox');
+    };
   }])
   .controller('inboxCtrl', ['$scope', 'messages', function($scope, messages) {
     $scope.title = 'Inbox';
