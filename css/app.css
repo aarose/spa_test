@@ -15,7 +15,18 @@ a:hover, a:focus {
   text-decoration: none;
   color: #2dbdfc;
 }
-
+.bs-callout {
+  padding: 20px;
+  margin: 20px 0;
+  border: 1px solid #fff;
+  border-left-width: 5px;
+  border-radius: 3px;
+  background: rgba(255, 255, 255, .2);
+  color: #112d40;
+}
+.bs-callout-warning {
+  border-left-color: #e09765;
+}
 
 
 /* ------------------------ Nav ----------------------- */
