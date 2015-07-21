@@ -1,0 +1,102 @@
+body {
+  background: -webkit-linear-gradient(#7b8385, #d87a3a); /* For Safari 5.1 to 6.0 */
+  background: -o-linear-gradient(#7b8385, #d87a3a); /* For Opera 11.1 to 12.0 */
+  background: -moz-linear-gradient(#7b8385, #d87a3a); /* For Firefox 3.6 to 15 */
+  background: linear-gradient(#7b8385, #d87a3a); /* Standard syntax */ 
+  height: 100%;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  color: #fff;
+}
+a {
+  color: #fff;
+}
+a:hover, a:focus {
+  text-decoration: none;
+  color: #2dbdfc;
+}
+
+
+
+/* ------------------------ Nav ----------------------- */
+.navbar-glass .active,
+.navbar-glass .active:hover {
+  border: 1px solid #aaa;
+  border-radius: 4px;
+}
+.navbar-glass .navbar-text{
+  color: #e5e5e5;
+}
+.navbar-glass .navbar-nav>li>a:hover,
+.navbar-glass .navbar-nav>li>a:focus {
+  background: none;
+  opacity: 0.5;
+}
+.navbar-glass a:focus,
+.navbar-glass a:hover {
+  color: #fbecee;
+}
+
+
+
+/* ------------------------ Btn ----------------------- */
+.btn-default {
+  background: none;
+  color: #fff;
+}
+.btn-default[disabled] {
+  color: #333;
+}
+.btn-default[disabled]:focus,
+.btn-default[disabled]:hover {
+  color: #333;
+}
+.btn-default:hover,
+.btn-default:focus {
+  background: #7b8385;
+  color: #fff;
+}
+.navbar-brand {
+  font-family: 'Amatic SC', cursive;
+  font-size: 30pt;
+}
+
+
+/* ----------------------- Form ---------------------------- */
+label.control-label {
+  text-transform: uppercase;
+}
+.has-success .form-control,
+.has-success .form-control:focus {
+  border-color: #d6f8d3;
+}
+.has-success .help-block,
+.has-success > label.control-label {
+  color: #d6f8d3;
+}
+.has-error .form-control,
+.has-error .form-control:focus {
+  border-color: #ff9a55;
+}
+.has-error .help-block,
+.has-error>label.control-label {
+  color: #ff9a55;
+}
+p.help-block {
+  color: #fff;
+}
+
+
+
+/* ------------------------ Custom -------------------- */
+#unauth {
+  text-align: center;
+}
+.brand {
+  font-family: 'Amatic SC', cursive;
+  font-size: 40pt;
+  color: #fff;
+}
+.self-highlight {
+  font-weight: bold;
+}

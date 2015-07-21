@@ -7,14 +7,35 @@
   </div><!--/page-header -->
 
   <div class="row">
+    <div class="col-md-12">
+      <div ng-repeat="success_note in success_notes">
+        <div class="alert alert-success" role="alert">
+          {{ success_note }}
+        </div><!--/ alert -->
+      </div>
+    </div><!-- /col12 -->
+  </div><!--/row -->
+
+  <div class="row">
+    <div class="col-md-12">
+      <div ng-repeat="danger_note in danger_notes">
+        <div class="alert alert-danger" role="alert">
+          {{ danger_note }}
+        </div><!--/ alert -->
+      </div>
+    </div><!-- /col12 -->
+  </div><!--/row -->
+
+
+  <div class="row">
     <div class="col-sm-12">
 
-      <form class="form-horizontal">
+      <form class="form-horizontal" name="messageForm">
 
         <div class="form-group">
           <label for="selectRecipient" class="col-sm-2 control-label">To:</label>
           <div class="col-sm-4">
-            <select ng-model="selectedRecipient" class="form-control" id="selectRecipient" ng-options="user.first_name + ' ' + user.last_name for user in user_list">
+            <select ng-model="selectedRecipient" name="recipient" class="form-control" id="selectRecipient" ng-options="user.name for user in user_list" required>
             </select>
           </div>
         </div>
@@ -22,14 +43,14 @@
         <div class="form-group">
           <label for="textMessage" class="col-sm-2 control-label">Message:</label>
           <div class="col-sm-7">
-            <textarea class="form-control" id="textMessage"></textarea>
-            <p class="help-block">150 character limit.</p>
+            <textarea class="form-control" ng-model="messageBody" ng-trim="false" ng-minlength="2" ng-maxlength="contentLimit" maxlength="{{contentLimit}}" required></textarea>
+            <p class="help-block">{{ contentLimit - messageBody.length }} characters left.</p>
           </div>
         </div>
 
         <div class="form-group">
           <div class="col-sm-offset-2 col-sm-10">
-            <button ng-click="send()" class="btn btn-default">Send</button>
+            <button ng-click="send()" ng-disabled="messageForm.$invalid || messageForm.$pristine || (messageForm.$dirty && messageBody.length < 2)" class="btn btn-default">Send</button>
           </div>
         </div>
 

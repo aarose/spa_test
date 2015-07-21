@@ -30,7 +30,7 @@ angular
         }]
       })
       .state('compose', {
-        url: '/compose',
+        url: '/compose?uid',
         templateUrl: 'templates/compose.html',
         resolve: {
           user_list: ['UserList', function(UserList) {
@@ -61,6 +61,7 @@ angular
       })
       .state('logout', {
         url: '/logout',
+        controller: 'logoutCtrl',
         onEnter: ['$state', '$cookies', function($state, $cookies) {
           if (!($cookies.get('authToken'))) {
             $state.go('login');

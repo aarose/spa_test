@@ -22,28 +22,12 @@ class UserListHandler(JsonHandler):
 
 class UserHandler(JsonHandler):
     """
-    Deals with actions that target a specific user.
-
-    TODO
+    Deals with user associated with the authentication token.
     """
-    def _get_user(self, user_id):
-        """ Return the user object. """
-        pass
-
     @token_required
     def get(self):
         """ Return detail view of user with matching ID. """
-        pass
-
-    @token_required
-    def put(self):
-        """ Update user with matching ID. """
-        pass
-
-    @token_required
-    def delete(self):
-        """ Delete the user with this ID. """
-        pass
+        self.return_success(data=self.user.serialize())
 
 
 class SignupHandler(JsonHandler):
@@ -65,12 +49,29 @@ class SignupHandler(JsonHandler):
             self.error_messages.append('Invalid email')
             is_valid = False
 
+        # Ensure password is at least 5 characters long
+        password = self.data.get('password1')
+        if password and len(password) < 5:
+            self.error_messages.append(
+                'Password must be at least 5 characters long.')
+            is_valid = False
+
+        # Ensure that password and password confirmation match
+        password_confirmation = self.data.get('password2')
+        if password and password_confirmation:
+            if password != password_confirmation:
+                self.error_messages.append(
+                    'Password and password confirmation must match.'
+                )
+                is_valid = False
+
         return is_valid
 
     def post(self):
         """ Create a new user. """
         # Verify that required fields are present, and data is valid
-        required_fields = ['first_name', 'last_name', 'email', 'password']
+        required_fields = ['first_name', 'last_name', 'email', 'password1',
+                           'password2']
         if not self.is_data_valid(required_fields):
             self.return_error(self.error_messages)
             return
@@ -83,13 +84,13 @@ class SignupHandler(JsonHandler):
             email=email,
             first_name=self.data.get('first_name'),
             last_name=self.data.get('last_name'),
-            password_raw=self.data.get('password'),
+            password_raw=self.data.get('password1'),
             verified=False,
         )
 
         user = user_data[0]
         if not user:
-            self.return_fail('This email is already in use.')
+            self.return_fail(['This email is already in use.'])
 
         self.return_success()
 
@@ -112,7 +113,7 @@ class LoginHandler(JsonHandler):
         except (webapp2_extras.auth.InvalidAuthIdError,
                 webapp2_extras.auth.InvalidPasswordError):
             # Obscure source of error, for security.
-            self.return_fail('Either the email or password was incorrect.')
+            self.return_fail(['Either the email or password was incorrect.'])
             return
 
         # Update the user's status to 'online'

@@ -43,6 +43,5 @@ class User(models.User):
         return {
             'name': self.get_full_name(),
             'uid': self.get_id(),
-            'email': self.email,
             'online': self.online,
         }

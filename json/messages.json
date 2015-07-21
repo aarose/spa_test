@@ -1,5 +1,5 @@
 [
-  {"date": "31-10-1991", "from": {"first_name": "Hermione", "last_name": "Granger", "uid": 2}, "contents": "I'm going to bed, before either of you come up with another clever idea that'll get us killed. Or worse- EXPELLED."},
+  {"date": "31-10-1991", "from": {"first_name": "Hermione", "last_name": "Granger", "uid": 2}, "contents": "Now, if you two don't mind, I'm going to bed, before either of you come up with another clever idea to get us killed, or worse- expelled."},
   {"date": "05-15-1995", "from": {"first_name": "Ronald", "last_name": "Weasley", "uid": 3}, "contents": "One person can't feel all that at once, they'd explode."},
   {"date": "06-25-1996", "from": {"first_name": "Harry", "last_name": "Potter", "uid": 1}, "contents": "I like turtles."}
 ]

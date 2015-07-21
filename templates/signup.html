@@ -1,60 +1,110 @@
 <header ng-include="'templates/unauth_nav.html'"></header>
 
-<div class="container">
-
-  <div class="page-header">
-    <h1>{{ title }}</h1>
-  </div><!--/page-header -->
+<div class="container" id="unauth">
 
   <div class="row">
     <div class="col-md-12">
+      <div ng-repeat="success_note in success_notes">
+        <div class="alert alert-success" role="alert">
+          {{ success_note }}
+        </div><!--/ alert -->
+      </div>
+    </div><!-- /col12 -->
+  </div><!--/row -->
 
-      <form class="form-horizontal" id="signupForm">
+  <div class="row">
+    <div class="col-md-12">
+      <div ng-repeat="danger_note in danger_notes">
+        <div class="alert alert-danger" role="alert">
+          {{ danger_note }}
+        </div><!--/ alert -->
+      </div>
+    </div><!-- /col12 -->
+  </div><!--/row -->
 
-        <div class="form-group">
-          <label for="user_first_name" class="col-sm-2 control-label">First Name</label>
-          <div class="col-sm-10">
-            <input type="email" class="form-control" id="user_first_name" placeholder="First name">
-          </div>
+  <div class="row">
+    <div class="col-md-4 col-md-offset-4">
+      <h1 class="brand">Owlr</h1> 
+
+      <form class="form-horizontal" name="signupForm">
+
+        <div ng-repeat="message in signupForm.error_messages">
+          <div class="alert alert-danger" role="alert">
+            {{ message }}
+          </div><!--/alert-->
         </div>
 
-        <div class="form-group">
-          <label for="user_last_name" class="col-sm-2 control-label">Last Name</label>
-          <div class="col-sm-10">
-            <input type="email" class="form-control" id="user_last_name" placeholder="Last name">
-          </div>
-        </div>
+        <div class="form-group" ng-class="{'has-error': signupForm.first_name.$invalid && signupForm.first_name.$dirty, 'has-success': signupForm.first_name.$valid && signupForm.first_name.$dirty}">
+          <label for="first_name" class="control-label">First Name</label>
+          <div class="col-sm-12">
+            <input type="text" class="form-control" name="first_name" ng-model="user.first_name" placeholder="First name" required>
+            <span ng-show="signupForm.first_name.$dirty && signupForm.first_name.$error.required" class="help-block">
+              Your first name is required.
+            </span>
+          </div><!--/col5 -->
+        </div><!--/form-group-->
+
+        <div class="form-group" ng-class="{'has-error': signupForm.last_name.$invalid && signupForm.last_name.$dirty, 'has-success': signupForm.last_name.$valid && signupForm.last_name.$dirty}">
+          <label for="last_name" class="control-label">Last Name</label>
+          <div class="col-sm-12">
+            <input type="text" class="form-control" name="last_name" ng-model="user.last_name" placeholder="Last name" required>
+            <span ng-show="signupForm.last_name.$dirty && signupForm.last_name.$error.required" class="help-block">
+              Your last name is required.
+            </span>
+          </div><!--/col5-->
+        </div><!--/form-group-->
+
+        <div class="form-group" ng-class="{'has-error': signupForm.email.$invalid && signupForm.email.$dirty, 'has-success': signupForm.email.$valid && signupForm.email.$dirty}">
+          <label for="email" class="control-label">Email</label>
+          <div class="col-sm-12">
+            <input type="email" class="form-control" name="email" ng-model="user.email" placeholder="Email" required>
+            <span ng-show="signupForm.email.$dirty && signupForm.email.$error.required" class="help-block">
+              Your email is required.
+            </span>
+          </div><!--/col5-->
+        </div><!--/form-group-->
+
+        <div class="form-group" ng-class="{'has-error': signupForm.password1.$invalid && signupForm.password1.$dirty, 'has-success': signupForm.password1.$valid && signupForm.password1.$dirty}">
+          <label for="password1" class="control-label">Password</label>
+          <div class="col-sm-12">
+            <input type="password" class="form-control" name="password1" ng-model="user.password1" placeholder="Password" required ng-minlength="5">
+            <span ng-show="signupForm.password1.$dirty && signupForm.password1.$error.required" class="help-block">
+              Your password is required.
+            </span>
+            <span ng-show="signupForm.password1.$dirty && signupForm.password1.$error.minlength" class="help-block">
+              Your password must be at least 5 characters long.
+            </span> 
+          </div><!--/col5-->
+        </div><!--/form-group-->
+
+        <div class="form-group" ng-class="{'has-error': (signupForm.password2.$invalid && signupForm.password2.$dirty) || (signupForm.password2.$dirty && signupForm.password1.$dirty && signupForm.password1.$modelValue != signupForm.password2.$modelValue), 'has-success': signupForm.password2.$valid && signupForm.password2.$dirty}">
+          <label for="password2" class="control-label">Confirm Password</label>
+          <div class="col-sm-12">
+            <input type="password" class="form-control" name="password2" ng-model="user.password2" placeholder="Please re-enter your chosen password" required ng-minlength="5">
+            <span ng-show="signupForm.password2.$dirty && signupForm.password2.$error.required" class="help-block">
+              Your password confirmation is required.
+            </span>
+            <span ng-show="signupForm.password2.$dirty && signupForm.password1.$dirty && signupForm.password1.$modelValue != signupForm.password2.$modelValue" class="help-block">
+              The passwords don't match.
+            </span>
+          </div><!--/col5-->
+        </div><!--/form-group-->
 
         <div class="form-group">
-          <label for="user_email" class="col-sm-2 control-label">Email</label>
-          <div class="col-sm-10">
-            <input type="email" class="form-control" id="user_email" placeholder="Email">
-          </div>
-        </div>
+          <div class="col-sm-12">
+            <button ng-click="signup()" ng-disabled="signupForm.$invalid || signupForm.password1.$modelValue != signupForm.password2.$modelValue" class="btn btn-default">Sign Up</button>
+          </div><!--/col10 offset2-->
+        </div><!--/form-group-->
 
-        <div class="form-group">
-          <label for="user_password1" class="col-sm-2 control-label">Password</label>
-          <div class="col-sm-10">
-            <input type="password" class="form-control" id="user_password1" placeholder="Password">
-          </div>
-        </div>
-
-        <div class="form-group">
-          <label for="user_password2" class="col-sm-2 control-label">Password</label>
-          <div class="col-sm-10">
-            <input type="password" class="form-control" id="user_password2" placeholder="Confirm password">
-          </div>
-        </div>
-
-        <div class="form-group">
-          <div class="col-sm-offset-2 col-sm-10">
-            <button ng-click="createUser()" class="btn btn-default">Sign Up</button>
-          </div>
-        </div>
+         <div class="col-sm-12">
+          <p>
+            Already a user? <a ui-sref="login">Log in</a>
+          </p>
+        </div><!--/col-->
 
       </form>
 
-    </div><!--/col -->
+    </div><!--/col12-->
   </div><!--/row -->
 
 </div><!--/container-->
