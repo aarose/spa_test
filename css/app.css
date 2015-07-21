@@ -1,9 +1,13 @@
+html {
+  height: 100%;
+}
 body {
   background: -webkit-linear-gradient(#7b8385, #d87a3a); /* For Safari 5.1 to 6.0 */
   background: -o-linear-gradient(#7b8385, #d87a3a); /* For Opera 11.1 to 12.0 */
   background: -moz-linear-gradient(#7b8385, #d87a3a); /* For Firefox 3.6 to 15 */
   background: linear-gradient(#7b8385, #d87a3a); /* Standard syntax */ 
   height: 100%;
+  margin: 0;
   background-repeat: no-repeat;
   background-attachment: fixed;
   color: #fff;
