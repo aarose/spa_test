@@ -1,0 +1,64 @@
+<header ng-include="'templates/main_nav.html'"></header>
+
+<div class="container">
+
+  <div class="page-header">
+    <h1>{{ title }}</h1>
+  </div><!--/page-header -->
+
+
+  <div class="row">
+    <div class="col-md-12">
+      <div ng-repeat="success_note in success_notes">
+        <div class="alert alert-success" role="alert">
+          {{ success_note }}
+        </div><!--/ alert -->
+      </div>
+    </div><!-- /col12 -->
+  </div><!--/row -->
+
+  <div class="row">
+    <div class="col-md-12">
+      <div ng-repeat="danger_note in danger_notes">
+        <div class="alert alert-danger" role="alert">
+          {{ danger_note }}
+        </div><!--/ alert -->
+      </div>
+    </div><!-- /col12 -->
+  </div><!--/row -->
+
+  <div class="row">
+    <div class="col-sm-12">
+
+      <div class="bs-callout bs-callout-warning">
+        <h4>Heads Up!</h4>
+        <p>
+          Since the messaging service <strong>isn't hooked up yet</strong>, these are placeholder owl messages.
+        </p>
+      </div>
+
+      <table ng-if="showMessages()" class="table">
+        <thead>
+          <tr>
+            <th class="col-sm-2">Date</th>
+            <th class="col-sm-2">From</th>
+            <th class="col-sm-8">Contents</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr ng-repeat="message in messages">
+            <td>{{ message.date }}</td>
+            <td>{{ message.from.first_name + ' ' + message.from.last_name }}</td>
+            <td>{{ message.contents }}</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div ng-if="!showMessages()">
+        <p class="lead">You have no messages.</p>
+      </div>
+
+    </div><!--/col -->
+  </div><!--/row -->
+
+</div><!--/container -->

@@ -17,22 +17,22 @@ def token_required(handler):
         # Check that an Authorization header with token was provided
         headers = self.request.headers
         if not headers.get('Authorization'):
-            self.return_error('Authorization token was not provided.')
+            self.return_error(['Authorization token was not provided.'])
             return
 
-        # Extract the Authorization toke
+        # Extract the Authorization token
         try:
             label, token = headers.get('Authorization').split(' ')
             if label != 'Token':
-                return self.return_error('Invalid token format.')
+                return self.return_error(['Invalid token format.'])
         except (AttributeError, ValueError):
             # Happens with too many values to unpack, or wrong type
-            return self.return_error('Invald token.')
+            return self.return_error(['Invald token.'])
 
         # Verify that the token is valid
         valid_token = Token.query(Token.token == token).get()
         if not valid_token:
-            return self.return_error('Invald token.')
+            return self.return_error(['Invalid token.'])
 
         # Add the token and user to the handler for easy access
         self.token = valid_token
@@ -73,14 +73,26 @@ class JsonHandler(BaseHandler):
         """ Returns a status of 'ok'. """
         self.response.write(json.dumps({'status': 'ok', 'data': data}))
 
-    def return_fail(self, fail_messages):
+    def return_fail(self, fail_messages, http_code=httplib.BAD_REQUEST):
         """
         Returns a status of 'fail' and accompanying messages.
 
         Args:
             fail_messages: iterable of strings. Each is an message about
                 something that contributed to the failure.
+            error_code (int): HTTP code to set for the response code. Defaults
+                to 400 (Bad Request).
         """
+        # Ensure the error messages are an iterable
+        if not hasattr(fail_messages, '__iter__'):
+            raise TypeError('Expected an iterable, got "%s"' % fail_messages)
+
+        # Set the status code and status message of the response
+        self.response.status_int = http_code
+        message = webapp2.Response.http_status_message(http_code)
+        self.response.status_message = message
+
+        # Write the response body content
         self.response.write(json.dumps({
             'status': 'fail',
             'messages': fail_messages,
@@ -95,10 +107,16 @@ class JsonHandler(BaseHandler):
             http_code (int): HTTP code to set for the response code. Defaults
                 to 400 (Bad Request).
         """
-        message = webapp2.Response.http_status_message(http_code)
+        # Ensure the error messages are an iterable
+        if not hasattr(error_messages, '__iter__'):
+            raise TypeError('Expected an iterable, got "%s"' % error_messages)
+
+        # Set the status code and status message of the response
         self.response.status_int = http_code
+        message = webapp2.Response.http_status_message(http_code)
         self.response.status_message = message
 
+        # Write the response body content
         self.response.write(json.dumps({
             'status': 'error',
             'messages': error_messages,
@@ -113,7 +131,7 @@ class JsonHandler(BaseHandler):
                 self.data = json.loads(self.request.body)
                 super(JsonHandler, self).dispatch()
             except ValueError:
-                self.return_error('Invalid JSON')
+                self.return_error(['Invalid JSON'])
         else:
             super(JsonHandler, self).dispatch()
 

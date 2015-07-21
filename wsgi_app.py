@@ -33,7 +33,7 @@ routes = [
         methods=['GET', 'OPTIONS'],
     ),
     webapp2.Route(
-        r'/api/v1/users/<user_id:\d+>',
+        r'/api/v1/users/current',
         handler=handlers.UserHandler,
         name='user',
         methods=['GET', 'OPTIONS'],

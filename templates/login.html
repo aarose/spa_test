@@ -1,0 +1,75 @@
+<header ng-include="'templates/unauth_nav.html'"></header>
+
+<div class="container" id="unauth">
+
+  <div class="row">
+    <div class="col-md-12">
+      <div ng-repeat="success_note in success_notes">
+        <div class="alert alert-success" role="alert">
+          {{ success_note }}
+        </div><!--/ alert -->
+      </div>
+    </div><!-- /col12 -->
+  </div><!--/row -->
+
+  <div class="row">
+    <div class="col-md-12">
+      <div ng-repeat="danger_note in danger_notes">
+        <div class="alert alert-danger" role="alert">
+          {{ danger_note }}
+        </div><!--/ alert -->
+      </div>
+    </div><!-- /col12 -->
+  </div><!--/row -->
+
+
+  <div class="row">
+    <div class="col-md-4 col-md-offset-4">
+      <h1 class="brand">Owlr</h1>
+
+      <form class="form-horizontal" name="loginForm">
+        <div ng-repeat="error_message in loginForm.error_messages">
+          <div class="alert alert-danger" role="alert">
+            {{ error_message }}
+          </div><!--/alert-->
+        </div>
+
+        <div class="form-group" ng-class="{'has-error': loginForm.email.$invalid && loginForm.email.$dirty, 'has-success': loginForm.email.$valid && loginForm.email.$dirty}">
+          <label class="control-label" for="email">Email</label>
+          <div class="col-sm-12">
+            <input type="email" id="email" name="email" class="form-control" ng-model="user.email" placeholder="Email" required>
+            <span ng-show="loginForm.email.$dirty && loginForm.email.$error.required" class="help-block">Your email is required.</span>
+          </div><!--/col-->
+        </div><!--/form-group-->
+
+        <div class="form-group" ng-class="{'has-error': loginForm.password.$invalid && loginForm.password.$dirty, 'has-success': loginForm.password.$valid && loginForm.password.$dirty}">
+          <label class="control-label" for="password">Password</label>
+          <div class="col-sm-12">
+            <input type="password" id="password" name="password" class="form-control" ng-model="user.password" placeholder="Password" required ng-minlength="5">
+            <span ng-show="loginForm.password.$dirty && loginForm.password.$error.required" class="help-block">
+              Your password is required.
+            </span>
+            <span ng-show="loginForm.password.$dirty && loginForm.password.$error.minlength" class="help-block">
+              Your password must be at least 5 characters.
+            </span>
+          </div><!--/col-->
+        </div><!--/form-group-->
+
+        <div class="form-group">
+          <div class="col-sm-12">
+            <button ng-click="authenticate()" class="btn btn-default" ng-disabled="loginForm.$invalid">Log In</button>
+          </div><!--/col -->
+        </div><!--/form-group-->
+
+        <div class="col-sm-12">
+          <p>
+            Don't have an account?  <a ui-sref="signup">Sign up now</a>
+          </p>
+        </div><!--/col-->
+
+      </form>
+
+    </div><!--/col -->
+  </div><!--/row -->
+
+</div><!--/container-->
