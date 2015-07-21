@@ -47,6 +47,10 @@ a:hover, a:focus {
 .navbar-glass a:hover {
   color: #fbecee;
 }
+.navbar-glass .navbar-toggle {
+  border: 1px solid #aaa;
+  border-radius: 4px;
+}
 
 
 
