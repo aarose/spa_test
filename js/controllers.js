@@ -95,7 +95,7 @@ angular
   .controller('composeCtrl',
               ['$scope', 'CurrentUser', 'user_list', '$cookies', '$stateParams', 'notificationService',
                function($scope, CurrentUser, user_list, $cookies, $stateParams, notificationService) {
-    $scope.title = 'Compose New Message';
+    $scope.title = 'Compose an Owl Message';
 
     $scope.success_notes = notificationService.getSuccessNotes();
     $scope.danger_notes = notificationService.getDangerNotes();

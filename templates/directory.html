@@ -39,7 +39,7 @@
         <tbody>
           <tr ng-repeat="user in user_list">
             <td ng-class="{'self-highlight': current_user.uid == user.uid}">{{ user.name }}</td>
-            <td><a ng-show="current_user.uid != user.uid" href="/#/compose?uid={{ user.uid }}" class="btn btn-default">Message</a>
+            <td><a ng-show="current_user.uid != user.uid" href="/#/compose?uid={{ user.uid }}" class="btn btn-default">Send an Owl</a>
           </tr>
         </tbody>
       </table>
