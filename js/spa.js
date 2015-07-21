@@ -1,5 +1,4 @@
-angular
-  .module('messageApp', ['ui.router', 'ngCookies'])
+var messageApp = angular.module('messageApp', ['ui.router', 'ngCookies'])
   .config(['$urlRouterProvider', '$stateProvider', function($urlRouterProvider, $stateProvider) {
     $urlRouterProvider.otherwise('/');
 
