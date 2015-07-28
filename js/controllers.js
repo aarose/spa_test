@@ -72,7 +72,10 @@ angular
       .error(function(data, status, headers, config) {
         // Add error message
         console.log('Could not log out.');
-        $state.go('inbox');
+        // Delete anyway
+        $cookies.remove('authToken');
+        // Redirect to login
+        $state.go('login');
       });
   }])
   .controller('inboxCtrl',
