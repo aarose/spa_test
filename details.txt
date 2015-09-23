@@ -1,0 +1,29 @@
+Online Platform Challenge
+
+Create a single page web application with the following features:
+
+User registration: anyone can register using their full name, email address and password
+A registered user can login and logout
+A logged in user can see a list of all users on the site
+A logged in user can see a list of all messages sent to him by other users
+A logged in user can send a message to any other user on the website
+Bonus: A logged in user can upload their profile photo so that other users can see it
+
+
+You are required to use the following stack of technologies:
+Google App Engine
+WebApp2
+Twitter bootstrap
+AngularJS
+DropzoneJS (for the bonus challenge)
+
+
+Implementation details:
+
+All your backend code must be written in Python
+Use AngularJS to create single page application on the front end and webapp2 to create REST api on the backend.
+Please use Datastore for all data storage. Do not use SQL databases.
+For the bonus assignment please use Images API to serve your resized images and Blobstore API in combination with Cloud Storage for storage as described here
+If something was not mentioned in this description then you probably do not need to do it.
+Your application should have a simple but polished user interface.
+All other details of implementation and design are up to you.

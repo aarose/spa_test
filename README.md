@@ -54,3 +54,7 @@ Token cannot be re-used.
 
     curl -H "Content-Type: application/json" -H "Authorization: Token a8a43fd309489c386b54c47fb5fbc1b8a375a3ec" -X GET "http://localhost:8080/api/v1/users"
 
+
+## Deploying
+
+    python ./appcfg.py --oauth2 -A spa-test-993 update ../Development/spa_test/
